@@ -38,6 +38,7 @@ let max = document.querySelector(".number").addEventListener("input",(e)=>{
   }
 })
 let p = document.querySelector(".resultado")
+
 let input = document.querySelector(".btn").addEventListener("click", () => {
 let valorRecebido = document.querySelector(".number").value;
 if(valorRecebido.length > 9 && !valorRecebido.includes('.')){
@@ -86,12 +87,15 @@ const centenaF = (valor) => {
   let num = valor.length - 2;
   let num1 = valor.length - 1;
   let num2 = valor.length - 3;
+  if (valor[num2] + valor[num] + valor[num1] === '000') {
+    return ''
+  }
   // Se o valor digitado for 100
   if (valor[num2] + valor[num] + valor[num1] === '100') {
     return "cem reais"
-  }else if (valor[num2] + valor[num] + valor[num1] === '000') {
-    return ''
-  } //else return centena[valor[num2]];
+  }else if(valor[num] + valor[num1] === '00'){
+    return centena[valor[valor.length-3]]
+  }
 
 }
 
@@ -112,7 +116,7 @@ const especialF = (valor) => {
   
   if (valor[num1] + valor[num] < '20') {
     if (valor[num1] + valor[num] >= '11')
-      return especial[valor[num1] + valor[num]] + ' / mil';
+      return especial[valor[num1] + valor[num]] + ' mil';
     else
       return unidade[valor[num1] + valor[num]] + ' mil';
   } else if (valor[num] !== '0') {
